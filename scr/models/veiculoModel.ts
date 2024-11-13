@@ -6,12 +6,12 @@ export interface VeiculoModel {
     modelo: string;
 }
 
-export const createVeiculoTable = () => {
-    const db = connectDB();
+export const createVeiculoTable = async () => {
+    const db = await connectDB();
     db.exec(`
     CREATE TABLE IF NOT EXISTS veiculos (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      placa TEXT,
+      placa TEXT NOT NULL,
       modelo TEXT
     );
   `);
