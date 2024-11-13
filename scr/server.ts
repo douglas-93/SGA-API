@@ -13,6 +13,6 @@ app.use('/api', pessoaRoutes);
 
 // Iniciar o servidor
 app.listen(PORT, async () => {
-    await createPessoaTable(); // Cria a tabela no início, se não existir
-    console.log(`Server is running on http://localhost:${PORT}`);
+    await createPessoaTable(); // Cria base de dados, se não existir
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

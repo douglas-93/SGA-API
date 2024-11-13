@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {addPessoa, delPessoa, getPessoas, upPessoa} from "../models/pessoaModel";
+import {addPessoa, delPessoa, getPessoas, upPessoa} from "../services/pessoaService";
 
 export const createPessoa = async (req: Request, res: Response) => {
     try {
