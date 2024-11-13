@@ -7,9 +7,9 @@ export interface PessoaModel {
 }
 
 // Função para criar a tabela se não existir
-export const createPessoaTable = async () => {
-    const db = await connectDB();
-    await db.exec(`
+export const createPessoaTable = () => {
+    const db = connectDB();
+    db.exec(`
     CREATE TABLE IF NOT EXISTS pessoas (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       nome TEXT,
