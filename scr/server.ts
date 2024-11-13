@@ -1,13 +1,10 @@
 import express from 'express';
 import pessoaRoutes from "./routes/pessoaRoutes";
-import {createPessoaTable} from "./models/pessoaModel";
 import veiculoRoutes from "./routes/veiculoRoutes";
-import {createVeiculoTable} from "./models/veiculoModel";
 import controladorDeAcessoRoutes from "./routes/controladorDeAcessoRoutes";
-import {createControladorDeAcessoTable} from "./models/controladorDeAcessoModel";
-import {controladorDeAcessoService} from "./services/controladorDeAcessoService";
-import {createEmpresaTable} from "./models/empresaModel";
 import empresaRoutes from "./routes/empresaRoutes";
+import {createDataBase} from "./database";
+import {controladorDeAcessoService} from "./services/controladorDeAcessoService";
 
 const app = express();
 const PORT = 3000;
@@ -23,10 +20,7 @@ app.use('/api', empresaRoutes);
 
 // Iniciar o servidor
 app.listen(PORT, async () => {
-    await createPessoaTable(); // Cria base de dados, se não existir
-    await createVeiculoTable();
-    await createControladorDeAcessoTable();
+    await createDataBase();
     await controladorDeAcessoService.initializeAdminUser();
-    await createEmpresaTable();
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
