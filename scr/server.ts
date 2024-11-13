@@ -6,6 +6,8 @@ import {createVeiculoTable} from "./models/veiculoModel";
 import controladorDeAcessoRoutes from "./routes/controladorDeAcessoRoutes";
 import {createControladorDeAcessoTable} from "./models/controladorDeAcessoModel";
 import {controladorDeAcessoService} from "./services/controladorDeAcessoService";
+import {createEmpresaTable} from "./models/empresaModel";
+import empresaRoutes from "./routes/empresaRoutes";
 
 const app = express();
 const PORT = 3000;
@@ -16,7 +18,8 @@ app.use(express.json());
 // Rotas
 app.use('/api', pessoaRoutes);
 app.use('/api', veiculoRoutes);
-app.use('/api', controladorDeAcessoRoutes)
+app.use('/api', controladorDeAcessoRoutes);
+app.use('/api', empresaRoutes);
 
 // Iniciar o servidor
 app.listen(PORT, async () => {
@@ -24,5 +27,6 @@ app.listen(PORT, async () => {
     await createVeiculoTable();
     await createControladorDeAcessoTable();
     await controladorDeAcessoService.initializeAdminUser();
+    await createEmpresaTable();
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
