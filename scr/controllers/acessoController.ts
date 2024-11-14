@@ -1,8 +1,11 @@
-class AcessoController {
-    create(req: Request, res: Response){}
-    list(req: Request, res: Response){}
-    update(req: Request, res: Response){}
-    delete(req: Request, res: Response){}
+import {BaseController} from "./baseController";
+import {AcessoModel} from "../models/acessoModel";
+import {acessoService} from "../services/acessoService";
+
+export class AcessoController extends BaseController<AcessoModel>{
+    constructor() {
+        super(acessoService);
+    }
 }
 
 export const acessoController = new AcessoController();

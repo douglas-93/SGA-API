@@ -1,5 +1,4 @@
 import Database from "better-sqlite3";
-import {controladorDeAcessoService} from "./services/controladorDeAcessoService";
 
 
 const db = new Database('./database.sqlite');
@@ -50,18 +49,18 @@ export const createDataBase = async () => {
     db.exec(`
         CREATE TABLE IF NOT EXISTS acessos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            data_hora_entrada TEXT NOT NULL,
-            data_hora_saida TEXT,
-            controlador_id INTEGER NOT NULL,
-            veiculo_id INTEGER,
-            pessoa_id INTEGER,
-            empresa_id INTEGER,
-            data_hora_insercao TEXT,
-            data_hora_alteracao TEXT,
-            FOREIGN KEY (controlador_id) REFERENCES controladores_de_acesso(id),
-            FOREIGN KEY (veiculo_id) REFERENCES veiculos(id),
-            FOREIGN KEY (pessoa_id) REFERENCES pessoas(id),
-            FOREIGN KEY (empresa_id) REFERENCES empresas(id)
+            entrada TEXT NOT NULL,
+            saida TEXT,
+            controladorId INTEGER NOT NULL,
+            veiculoId INTEGER,
+            pessoaId INTEGER,
+            empresaId INTEGER,
+            insercao TEXT,
+            alteracao TEXT,
+            FOREIGN KEY (controladorId) REFERENCES controladores_de_acesso(id),
+            FOREIGN KEY (veiculoId) REFERENCES veiculos(id),
+            FOREIGN KEY (pessoaId) REFERENCES pessoas(id),
+            FOREIGN KEY (empresaId) REFERENCES empresas(id)
         );
     `);
 }
