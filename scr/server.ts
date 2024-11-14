@@ -5,6 +5,7 @@ import controladorDeAcessoRoutes from "./routes/controladorDeAcessoRoutes";
 import empresaRoutes from "./routes/empresaRoutes";
 import {createDataBase} from "./database";
 import {controladorDeAcessoService} from "./services/controladorDeAcessoService";
+import acessoRoutes from "./routes/acessoRoutes";
 
 const app = express();
 const PORT = 3000;
@@ -17,6 +18,7 @@ app.use('/api', pessoaRoutes);
 app.use('/api', veiculoRoutes);
 app.use('/api', controladorDeAcessoRoutes);
 app.use('/api', empresaRoutes);
+app.use('/api', acessoRoutes);
 
 // Iniciar o servidor
 app.listen(PORT, async () => {
