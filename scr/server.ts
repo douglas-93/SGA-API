@@ -5,11 +5,8 @@ import controladorDeAcessoRoutes from "./routes/controladorDeAcessoRoutes";
 import empresaRoutes from "./routes/empresaRoutes";
 import {createDataBase} from "./database";
 import {controladorDeAcessoService} from "./services/controladorDeAcessoService";
-<<<<<<< HEAD
 import cors from 'cors';
-=======
-import acessoRoutes from "./routes/acessoRoutes";
->>>>>>> ebb01c743cca3683ee7ad380c0c5641957bc575c
+import acessoRoutes from './routes/acessoRoutes';
 
 const app = express();
 const PORT = 5000;
