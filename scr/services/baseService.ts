@@ -30,6 +30,24 @@ export class BaseService<T> {
         return stmt.all();
     }
 
+    // Função para obter registros filtrados
+    async getBy(params: { chave: string, valor: string }[]): Promise<unknown[]> {
+        const db = await connectDB();
+        let sql = `SELECT * FROM ${this.tableName}`;
+    
+        if (params.length > 0) {
+            const whereClauses = params.map(p => `${p.chave} LIKE ?`).join(' AND ');
+            sql += ` WHERE ${whereClauses}`;
+        }
+    
+        // Adicione os '%' diretamente no valor dos parâmetros
+        const values = params.map(p => `%${p.valor}%`);
+    
+        const stmt = db.prepare(sql);
+        return stmt.all(...values);
+    }
+    
+
     // Função para atualizar um registro
     async update(id: number, item: Partial<T>): Promise<boolean> {
         const db = await connectDB();

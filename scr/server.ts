@@ -6,12 +6,14 @@ import {createVeiculoTable} from "./models/veiculoModel";
 import controladorDeAcessoRoutes from "./routes/controladorDeAcessoRoutes";
 import {createControladorDeAcessoTable} from "./models/controladorDeAcessoModel";
 import {controladorDeAcessoService} from "./services/controladorDeAcessoService";
+import cors from 'cors';
 
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 
 // Middleware para analisar JSON
 app.use(express.json());
+app.use(cors())
 
 // Rotas
 app.use('/api', pessoaRoutes);

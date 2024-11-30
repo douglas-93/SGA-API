@@ -22,7 +22,18 @@ export class BaseController<T> {
     async list(_req: Request, res: Response) {
         try {
             const items = await this.service.getAll();
-            res.json(items);
+            res.status(200).json(items);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Falha ao listar itens' });
+        }
+    }
+
+    // Método para listar todos os registros
+    async getBy(_req: Request, res: Response) {
+        try {
+            const item = await this.service.getBy(_req.body);
+            res.status(200).json(item);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Falha ao listar itens' });
@@ -34,7 +45,7 @@ export class BaseController<T> {
         try {
             const { id, ...data } = req.body;
             const updatedItem = await this.service.update(id, data);
-            res.json(updatedItem);
+            res.status(201).json(updatedItem);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Falha ao atualizar item' });
@@ -46,7 +57,7 @@ export class BaseController<T> {
         try {
             const { id } = req.body;
             const deletedItem = await this.service.delete(id);
-            res.json(deletedItem);
+            res.status(200).json(deletedItem);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Falha ao deletar item' });
