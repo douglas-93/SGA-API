@@ -5,15 +5,3 @@ export interface PessoaModel {
     nome: string;
     documento: string;
 }
-
-// Função para criar a tabela se não existir
-export const createPessoaTable = async () => {
-    const db = await connectDB();
-    db.exec(`
-    CREATE TABLE IF NOT EXISTS pessoas (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      nome TEXT NOT NULL,
-      documento TEXT
-    );
-  `);
-};

@@ -1,5 +1,5 @@
-import { BaseService } from './baseService';
-import { ControladorDeAcessoModel } from '../models/controladorDeAcessoModel';
+import {BaseService} from './baseService';
+import {ControladorDeAcessoModel} from '../models/controladorDeAcessoModel';
 import bcrypt from 'bcrypt';
 import {connectDB} from "../database";
 
@@ -27,7 +27,7 @@ export class ControladorDeAcessoService extends BaseService<ControladorDeAcessoM
     async add(data: ControladorDeAcessoModel): Promise<ControladorDeAcessoModel> {
         // Realizar o hash da senha antes de salvar
         const hashedPassword = await this.hashPassword(data.senha);
-        const newData = { ...data, senha: hashedPassword };
+        const newData = {...data, senha: hashedPassword};
 
         // Chamar o método `add` da classe base
         const result = await super.add(newData);
@@ -40,7 +40,9 @@ export class ControladorDeAcessoService extends BaseService<ControladorDeAcessoM
     async authenticate(usuario: string, senha: string): Promise<ControladorDeAcessoModel | null> {
         // Buscar o usuário no banco de dados pelo campo `usuario`
         const db = await connectDB();
-        const stmt = db.prepare(`SELECT * FROM controladores_de_acesso WHERE usuario = ?`);
+        const stmt = db.prepare(`SELECT *
+                                 FROM controladores_de_acesso
+                                 WHERE usuario = ?`);
         const user = <ControladorDeAcessoModel>stmt.get(usuario);
 
         if (user && await this.comparePassword(senha, user.senha)) {
@@ -55,7 +57,9 @@ export class ControladorDeAcessoService extends BaseService<ControladorDeAcessoM
     // Método para inicializar um usuário administrador padrão
     async initializeAdminUser() {
         const db = await connectDB();
-        const stmt = db.prepare(`SELECT * FROM controladores_de_acesso WHERE usuario = ?`);
+        const stmt = db.prepare(`SELECT *
+                                 FROM controladores_de_acesso
+                                 WHERE usuario = ?`);
         const adminUser = stmt.get('admin');
 
         // Se o usuário admin não existe, cria um com senha padrão
